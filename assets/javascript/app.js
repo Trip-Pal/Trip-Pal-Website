@@ -66,20 +66,20 @@ function getFoodAverage(restauranteList) {
 }
 
 function ratingFood(calculateAverageFood) {
-     var progressDiv = $("<div>");
-     progressDiv.addClass("progress");
- 
-     var progressBarDiv = $("<div>");
-     progressBarDiv.attr("role", "progressbar");
-     progressBarDiv.attr("aria-valuemin", "1");
-     progressBarDiv.attr("aria-valuemax", "4");
-     progressBarDiv.attr("style", "width: 10%");
-     progressBarDiv.attr("aria-valuenow", calculateAverageFood);    
+    var progressDiv = $("<div>");
+    progressDiv.addClass("progress");
+
+    var progressBarDiv = $("<div>");
+    progressBarDiv.attr("role", "progressbar");
+    progressBarDiv.attr("aria-valuemin", "1");
+    progressBarDiv.attr("aria-valuemax", "4");
+    progressBarDiv.attr("style", "width: 10%");
+    progressBarDiv.attr("aria-valuenow", calculateAverageFood);
 
     console.log("Inside the function", calculateAverageFood);
 
-    if (calculateAverageFood <= 2) {  
-        progressBarDiv.addClass("progress-bar progress-bar-striped bg-success");      
+    if (calculateAverageFood <= 2) {
+        progressBarDiv.addClass("progress-bar progress-bar-striped bg-success");
         console.log("the food is cheap!");
     }
     else if (calculateAverageFood >= 2.1) {
@@ -90,3 +90,39 @@ function ratingFood(calculateAverageFood) {
     progressDiv.append(progressBarDiv);
     $("#foodCity1").append(progressDiv);
 }
+
+// This is our API key
+var APIKey = "d9644357007eea70b23279e2e3fa9466";
+
+var city1 = 
+
+document.getElementById('link').onclick = function()
+{
+    location.href = document.getElementById('link_id').value;
+};
+
+// Here we are building the URL we need to query the database
+var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+    "q=" + city1 + "&units=imperial&appid=" + APIKey;
+
+// Here we run our AJAX call to the OpenWeatherMap API
+$.ajax({
+    url: queryURL,
+    method: "GET"
+})
+    // We store all of the retrieved data inside of an object called "response"
+    .then(function (response) {
+
+        // Log the queryURL
+        console.log(queryURL);
+
+        // Log the resulting object
+        console.log(response);
+
+        // Transfer content to HTML
+        //$(".city").html("<h1>" + response.name + " Weather Details</h1>");
+        //$(".temp").text("Temperature (F) " + response.main.temp);
+
+        // Log the data in the console as well
+        console.log("Temperature (F): " + response.main.temp);
+    });

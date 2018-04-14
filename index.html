@@ -16,7 +16,7 @@
     <body>
 
         <!-- Navigation -->
-        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style= "z-index: 10;">
+        <nav class="navbar navbar-expand-lg navbar-light" id="mainNav" style="z-index: 10;">
             <div class="container">
                 <a class="navbar-brand" style="color:#e3f2fd" href="index.html">Trip-Pal</a>
                 <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
@@ -93,9 +93,9 @@
             <div class="row justify-content-between">
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" id="search-bar-1" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn btn-sm active">
-                            <button class="btn btn-secondary" type="button">Go!</button>
+                            <button id = "search-button-1" class="btn btn-secondary" type="button">Go!</button>
                         </span>
                     </div>
                 </div>
@@ -109,9 +109,9 @@
                 </div>
                 <div class="col-lg-4">
                     <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search for...">
+                        <input type="text" id="search-bar-2" class="form-control" placeholder="Search for...">
                         <span class="input-group-btn btn-sm active">
-                            <button class="btn btn-secondary" type="button">Go!</button>
+                            <button id = "search-button-2" class="btn btn-secondary" type="button">Go!</button>
                         </span>
                     </div>
                 </div>
@@ -281,50 +281,23 @@
 
             <!--script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
                 crossorigin="anonymous"></script-->
-                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
                 crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
                 crossorigin="anonymous"></script>
 
-                <script src="assets/javascript/app.js"></script>
+            <script src="assets/javascript/app.js"></script>
     </body>
 
-            <!-- Retrieved data will be dumped here -->
-            <div class="city"></div>
-            <div class="temp"></div>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-            <script type="text/javascript" src="app.js"></script>
-                // This is our API key
-                var APIKey = "d9644357007eea70b23279e2e3fa9466";
+    <!-- Retrieved data will be dumped here -->
+    <div class="city"></div>
+    <div class="temp"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
 
-                // Here we are building the URL we need to query the database
-                var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
-                    "q=Bujumbura,Burundi&units=imperial&appid=" + APIKey;
+    </script>
 
-                // Here we run our AJAX call to the OpenWeatherMap API
-                $.ajax({
-                    url: queryURL,
-                    method: "GET"
-                })
-                    // We store all of the retrieved data inside of an object called "response"
-                    .then(function (response) {
-
-                        // Log the queryURL
-                        console.log(queryURL);
-
-                        // Log the resulting object
-                        console.log(response);
-
-                        // Transfer content to HTML
-                        $(".city").html("<h1>" + response.name + " Weather Details</h1>");
-                        $(".temp").text("Temperature (F) " + response.main.temp);
-
-                        // Log the data in the console as well
-                        console.log("Temperature (F): " + response.main.temp);
-                    });
-            </script>
-
-</body>
+    </body>
 
 </html>
