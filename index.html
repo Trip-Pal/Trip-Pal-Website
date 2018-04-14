@@ -13,8 +13,6 @@
         crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="assets/css/style.css"> </head>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
 <body>
 
     <!-- Navigation -->
@@ -95,6 +93,14 @@
         <h1 class="my-4">Page Heading
             <small>Secondary Text</small>
         </h1>
+        <form>
+            <input type="text" placeholder="Search..." required>
+            <input type="button" value="Search">
+        </form>
+        <form>
+            <input type="text" placeholder="Search2..." required>
+            <input type="button" value="Search">
+        </form>
         <div class="row">
             <div class="col-lg-6 portfolio-item">
                 <div class="card h-100">
@@ -124,22 +130,50 @@
                             necessitatibus unde temporibus.</p>
                     </div>
                 </div>
-                <div id="foodCity1">
+            </div>
 
-                </div>
-            </div>           
-            
-
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+                crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ"
                 crossorigin="anonymous"></script>
             <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
                 crossorigin="anonymous"></script>
 
-            <script src="assets/javascript/app.js"></script>
+            <!-- Retrieved data will be dumped here -->
+            <div class="city"></div>
+            <div class="temp"></div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+            <script type="text/javascript">
+                // This is our API key
+                var APIKey = "d9644357007eea70b23279e2e3fa9466";
 
-            
+                // Here we are building the URL we need to query the database
+                var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
+                    "q=Bujumbura,Burundi&units=imperial&appid=" + APIKey;
 
+                // Here we run our AJAX call to the OpenWeatherMap API
+                $.ajax({
+                    url: queryURL,
+                    method: "GET"
+                })
+                    // We store all of the retrieved data inside of an object called "response"
+                    .then(function (response) {
+
+                        // Log the queryURL
+                        console.log(queryURL);
+
+                        // Log the resulting object
+                        console.log(response);
+
+                        // Transfer content to HTML
+                        $(".city").html("<h1>" + response.name + " Weather Details</h1>");
+                        $(".temp").text("Temperature (F) " + response.main.temp);
+
+                        // Log the data in the console as well
+                        console.log("Temperature (F): " + response.main.temp);
+                    });
+            </script>
+</body>
 
 </body>
 
