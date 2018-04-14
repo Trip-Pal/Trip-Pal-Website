@@ -38,6 +38,8 @@ function initAutocomplete() {
     // When the user selects an address from the dropdown, populate the address
     // fields in the form.
     autocomplete.addListener('place_changed', fillInAddress);
+
+    geolocate();
 }
 
 initAutocomplete();
