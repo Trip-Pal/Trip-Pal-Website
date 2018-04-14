@@ -1,3 +1,13 @@
+$(document).on("click", "#goCity1", function (event) {
+    console.log("test");
+
+    var queryUrlCity1 = "https://www.google.com/maps/embed/v1/place?key=AIzaSyC4EtU8sfUywgEwdnHqYpC7qVLSHGpEOfg&q=Eiffel+Tower,Paris+France";
+
+    $('#mapCity1').attr("src", queryUrlCity1);
+});
+
+
+
 
 
 function getFoodAndRating() {
@@ -25,8 +35,6 @@ function getFoodAndRating() {
     });*/
 }
 
-getFoodAndRating();
-
 function getFoodAverage(restauranteList) {
     var averageFood = 0;
 
@@ -48,7 +56,7 @@ function getFoodAverage(restauranteList) {
     ratingFood(calculateAverageFood);
 
     //Calculate Rating
-    var calculateRating = rating / restauranteList.length;  
+    var calculateRating = rating / restauranteList.length;
     ratingPlace(calculateRating);
 }
 
@@ -80,14 +88,14 @@ function ratingFood(calculateAverageFood) {
     $("#foodCity1").append(progressDiv);
 }
 
-function ratingPlace(calculateRating){
+function ratingPlace(calculateRating) {
     var progressDiv = $("<div>");
     progressDiv.addClass("progress");
 
     var progressBarDiv = $("<div>");
     progressBarDiv.attr("role", "progressbar");
     progressBarDiv.attr("aria-valuemin", "1");
-    progressBarDiv.attr("aria-valuemax", "4");
+    progressBarDiv.attr("aria-valuemax", "10");
 
     progressBarDiv.attr("style", "width: " + calculateRating + "%");
 
