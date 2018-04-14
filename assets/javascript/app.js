@@ -1,6 +1,6 @@
 
 
-function getFood() {
+function getFoodAndRating() {
 
     var queryUrlCity1 = "https://api.foursquare.com/v2/venues/explore?&ll=40.723764,-73.994057&client_id=J50IQCIUKW05KX5XP24VYIU3CVBAFSBGEXG1EGIL50PEGXA5&client_secret=3G1VQAJ4JDVCZLQALXCR0RHRYY3XYI5IYR4O1G2CFWI4JAR0&query=restaurants&v=20180404";
 
@@ -25,7 +25,7 @@ function getFood() {
     });*/
 }
 
-getFood();
+getFoodAndRating();
 
 function getFoodAverage(restauranteList) {
     var averageFood = 0;
@@ -48,38 +48,27 @@ function getFoodAverage(restauranteList) {
     ratingFood(calculateAverageFood);
 
     //Calculate Rating
-    var calculateRating = rating / restauranteList.length;
-
-    if (calculateRating > 8) {
-        console.log("Excelent!");
-    }
-    else {
-        if (calculateRating < 4) {
-            console.log("Bad!");
-        }
-        else {
-            if (calculateRating >= 4 && calculateRating <= 8) {
-                console.log("Normal");
-            }
-        }
-    }
+    var calculateRating = rating / restauranteList.length;  
+    ratingPlace(calculateRating);
 }
 
 function ratingFood(calculateAverageFood) {
-     var progressDiv = $("<div>");
-     progressDiv.addClass("progress");
- 
-     var progressBarDiv = $("<div>");
-     progressBarDiv.attr("role", "progressbar");
-     progressBarDiv.attr("aria-valuemin", "1");
-     progressBarDiv.attr("aria-valuemax", "4");
-     progressBarDiv.attr("style", "width: 10%");
-     progressBarDiv.attr("aria-valuenow", calculateAverageFood);    
+    var progressDiv = $("<div>");
+    progressDiv.addClass("progress");
+
+    var progressBarDiv = $("<div>");
+    progressBarDiv.attr("role", "progressbar");
+    progressBarDiv.attr("aria-valuemin", "1");
+    progressBarDiv.attr("aria-valuemax", "4");
+
+    progressBarDiv.attr("style", "width: " + calculateAverageFood + "%");
+
+    progressBarDiv.attr("aria-valuenow", calculateAverageFood);
 
     console.log("Inside the function", calculateAverageFood);
 
-    if (calculateAverageFood <= 2) {  
-        progressBarDiv.addClass("progress-bar progress-bar-striped bg-success");      
+    if (calculateAverageFood <= 2) {
+        progressBarDiv.addClass("progress-bar progress-bar-striped bg-success");
         console.log("the food is cheap!");
     }
     else if (calculateAverageFood >= 2.1) {
@@ -89,4 +78,40 @@ function ratingFood(calculateAverageFood) {
 
     progressDiv.append(progressBarDiv);
     $("#foodCity1").append(progressDiv);
+}
+
+function ratingPlace(calculateRating){
+    var progressDiv = $("<div>");
+    progressDiv.addClass("progress");
+
+    var progressBarDiv = $("<div>");
+    progressBarDiv.attr("role", "progressbar");
+    progressBarDiv.attr("aria-valuemin", "1");
+    progressBarDiv.attr("aria-valuemax", "4");
+
+    progressBarDiv.attr("style", "width: " + calculateRating + "%");
+
+    progressBarDiv.attr("aria-valuenow", calculateRating);
+
+    console.log("Inside the function", calculateRating);
+
+    if (calculateRating > 8) {
+        progressBarDiv.addClass("progress-bar progress-bar-striped bg-success");
+        console.log("Excelent!");
+    }
+    else {
+        if (calculateRating < 4) {
+            progressBarDiv.addClass("progress-bar progress-bar-striped bg-danger");
+            console.log("Bad!");
+        }
+        else {
+            if (calculateRating >= 4 && calculateRating <= 8) {
+                progressBarDiv.addClass("progress-bar progress-bar-striped bg-info");
+                console.log("Normal");
+            }
+        }
+    }
+    progressDiv.append(progressBarDiv);
+    $("#ratingCity1").append(progressDiv);
+
 }
