@@ -5,6 +5,7 @@ body {
     color:white; 
     font-size: 30px;
 }
+
   .nav-item{
      padding:0px 20px 0px 20px;
      font-size: 20px;
@@ -25,5 +26,12 @@ body {
     left: 0;
     width: 100%;
     filter:brightness(65%);
-    
+  }
+  .search2 {
+    float: right;
+    text-align: right;
+  }
+  .button2 {
+    float: right;
+    text-align: right;
   }
