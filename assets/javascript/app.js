@@ -1,3 +1,4 @@
+
 $(document).on("click", "#goCity1", function (event) {
     console.log("test");
 
