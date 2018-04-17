@@ -1,6 +1,16 @@
+$(document).on("click", "#goCity1", function (event) {
+    console.log("test");
+
+    var queryUrlCity1 = "https://www.google.com/maps/embed/v1/place?key=AIzaSyC4EtU8sfUywgEwdnHqYpC7qVLSHGpEOfg&q=Eiffel+Tower,Paris+France";
+
+    $('#mapCity1').attr("src", queryUrlCity1);
+});
 
 
-function getFood() {
+
+
+
+function getFoodAndRating() {
 
     var queryUrlCity1 = "https://api.foursquare.com/v2/venues/explore?&ll=40.723764,-73.994057&client_id=J50IQCIUKW05KX5XP24VYIU3CVBAFSBGEXG1EGIL50PEGXA5&client_secret=3G1VQAJ4JDVCZLQALXCR0RHRYY3XYI5IYR4O1G2CFWI4JAR0&query=restaurants&v=20180404";
 
@@ -15,7 +25,6 @@ function getFood() {
     });
 
     /*var queryUrlCity2 = "https://api.foursquare.com/v2/venues/explore?&ll=40.723764,-73.994057&client_id=J50IQCIUKW05KX5XP24VYIU3CVBAFSBGEXG1EGIL50PEGXA5&client_secret=3G1VQAJ4JDVCZLQALXCR0RHRYY3XYI5IYR4O1G2CFWI4JAR0&query=restaurants&v=20180404";
-
     $.ajax({
         url: queryUrl,
         method: "GET"
@@ -24,8 +33,6 @@ function getFood() {
         console.log(response.response.groups["0"].items);
     });*/
 }
-
-getFood();
 
 function getFoodAverage(restauranteList) {
     var averageFood = 0;
@@ -49,20 +56,7 @@ function getFoodAverage(restauranteList) {
 
     //Calculate Rating
     var calculateRating = rating / restauranteList.length;
-
-    if (calculateRating > 8) {
-        console.log("Excelent!");
-    }
-    else {
-        if (calculateRating < 4) {
-            console.log("Bad!");
-        }
-        else {
-            if (calculateRating >= 4 && calculateRating <= 8) {
-                console.log("Normal");
-            }
-        }
-    }
+    ratingPlace(calculateRating);
 }
 
 function ratingFood(calculateAverageFood) {
@@ -73,7 +67,9 @@ function ratingFood(calculateAverageFood) {
     progressBarDiv.attr("role", "progressbar");
     progressBarDiv.attr("aria-valuemin", "1");
     progressBarDiv.attr("aria-valuemax", "4");
-    progressBarDiv.attr("style", "width: 10%");
+
+    progressBarDiv.attr("style", "width: " + calculateAverageFood + "%");
+
     progressBarDiv.attr("aria-valuenow", calculateAverageFood);
 
     console.log("Inside the function", calculateAverageFood);
@@ -91,38 +87,38 @@ function ratingFood(calculateAverageFood) {
     $("#foodCity1").append(progressDiv);
 }
 
-// This is our API key
-var APIKey = "d9644357007eea70b23279e2e3fa9466";
+function ratingPlace(calculateRating) {
+    var progressDiv = $("<div>");
+    progressDiv.addClass("progress");
 
-var city1 = 
+    var progressBarDiv = $("<div>");
+    progressBarDiv.attr("role", "progressbar");
+    progressBarDiv.attr("aria-valuemin", "1");
+    progressBarDiv.attr("aria-valuemax", "10");
 
-document.getElementById('link').onclick = function()
-{
-    location.href = document.getElementById('link_id').value;
-};
+    progressBarDiv.attr("style", "width: " + calculateRating + "%");
 
-// Here we are building the URL we need to query the database
-var queryURL = "https://api.openweathermap.org/data/2.5/weather?" +
-    "q=" + city1 + "&units=imperial&appid=" + APIKey;
+    progressBarDiv.attr("aria-valuenow", calculateRating);
 
-// Here we run our AJAX call to the OpenWeatherMap API
-$.ajax({
-    url: queryURL,
-    method: "GET"
-})
-    // We store all of the retrieved data inside of an object called "response"
-    .then(function (response) {
+    console.log("Inside the function", calculateRating);
 
-        // Log the queryURL
-        console.log(queryURL);
+    if (calculateRating > 8) {
+        progressBarDiv.addClass("progress-bar progress-bar-striped bg-success");
+        console.log("Excelent!");
+    }
+    else {
+        if (calculateRating < 4) {
+            progressBarDiv.addClass("progress-bar progress-bar-striped bg-danger");
+            console.log("Bad!");
+        }
+        else {
+            if (calculateRating >= 4 && calculateRating <= 8) {
+                progressBarDiv.addClass("progress-bar progress-bar-striped bg-info");
+                console.log("Normal");
+            }
+        }
+    }
+    progressDiv.append(progressBarDiv);
+    $("#ratingCity1").append(progressDiv);
 
-        // Log the resulting object
-        console.log(response);
-
-        // Transfer content to HTML
-        //$(".city").html("<h1>" + response.name + " Weather Details</h1>");
-        //$(".temp").text("Temperature (F) " + response.main.temp);
-
-        // Log the data in the console as well
-        console.log("Temperature (F): " + response.main.temp);
-    });
+}
