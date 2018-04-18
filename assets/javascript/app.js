@@ -123,3 +123,26 @@ function ratingPlace(calculateRating) {
     $("#ratingCity1").append(progressDiv);
 
 }
+
+var config = {
+    apiKey: "AIzaSyAC4wC49vngw174lvtjWjfA1R15hy-VYy0",
+    authDomain: "project-1-e45b8.firebaseapp.com",
+    databaseURL: "https://project-1-e45b8.firebaseio.com",
+    projectId: "project-1-e45b8",
+    storageBucket: "project-1-e45b8.appspot.com",
+    messagingSenderId: "409341424469"
+};
+firebase.initializeApp(config);
+
+firebase.auth().onAuthStateChanged(function (user) {
+    if (user) {
+        document.getElementById
+    } else {
+        // No user is signed in.
+    }
+});
+
+function login() {
+    var userEmail = document.getElementById("email_field").value;
+    var userPass = document.getElementById("password_field").value;
+}
