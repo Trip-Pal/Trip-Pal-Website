@@ -144,6 +144,7 @@ $(document).on("click", "#compareCities", function (event) {
     //city1 = city1.replace(",","+");
     //city1 = city1.replace(", ","+");
     city1 = city1.replace(" ", "+");
+    city1 = city1.replace(", ", ",");
     city1 = city1.replace(".", "");
     city1 = city1.replace("á", "a");
     city1 = city1.replace("é", "e");
@@ -159,6 +160,7 @@ $(document).on("click", "#compareCities", function (event) {
     //city2 = city2.replace(", ","+");
     city2 = city2.replace(" ", "+");
     city2 = city2.replace(".", "");
+    city1 = city1.replace(", ", ",");
     city2 = city2.replace("á", "a");
     city2 = city2.replace("é", "e");
     city2 = city2.replace("í", "i");
