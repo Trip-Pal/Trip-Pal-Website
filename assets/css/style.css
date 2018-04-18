@@ -108,7 +108,7 @@ color: turquoise;
 
 .loginBody {
   color: #999;
-  background-image: url(../images/place.jpg);
+  background-image: url(../images/loginplace.jpg);
   background-size: 100% 100%;
   
   font-family: 'Roboto', sans-serif;
@@ -162,7 +162,7 @@ color: turquoise;
   .signup-form .btn {        
       font-size: 16px;
       font-weight: bold;
-  background: #19aa8d;
+      background: #19aa8d;
       border-radius: 3px;
   border: none;
   min-width: 140px;
