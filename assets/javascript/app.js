@@ -143,7 +143,7 @@ $(document).on("click", "#compareCities", function (event) {
 
     //city1 = city1.replace(",","+");
     //city1 = city1.replace(", ","+");
-    city1 = city1.replace(" ", "");
+    city1 = city1.replace(" ", "+");
     city1 = city1.replace(".", "");
     city1 = city1.replace("á", "a");
     city1 = city1.replace("é", "e");
@@ -157,7 +157,7 @@ $(document).on("click", "#compareCities", function (event) {
 
     //city2 = city2.replace(" ","+");
     //city2 = city2.replace(", ","+");
-    city2 = city2.replace(" ", "");
+    city2 = city2.replace(" ", "+");
     city2 = city2.replace(".", "");
     city2 = city2.replace("á", "a");
     city2 = city2.replace("é", "e");
@@ -431,7 +431,7 @@ function getWeather_City1(city) {
         method: "GET"
     })
         // We store all of the retrieved data inside of an object called "response"
-        .then(function (response) {           
+        .then(function (response) {
 
             var temperature = response.main.temp;
 
@@ -502,7 +502,7 @@ function getTrending_City1(city) {
 
     $("#title_City1").text($("#textCity1").val());
 
-    console.log("TRENDING",queryURL);
+    console.log("TRENDING", queryURL);
 
     $.ajax({
         url: queryURL,
@@ -537,7 +537,7 @@ function getTrending_City2(city) {
 
     $("#title_City2").text($("#textCity2").val());
 
-    console.log("TRENDING",queryURL);
+    console.log("TRENDING", queryURL);
 
     $.ajax({
         url: queryURL,
