@@ -191,3 +191,8 @@ color: turquoise;
   font-size: 7px;
   position: absolute;
 }
+
+
+#trending_city2{
+  visibility: hidden;
+}

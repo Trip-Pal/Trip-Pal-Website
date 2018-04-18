@@ -55,7 +55,6 @@ function initAutocomplete() {
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function (place) {
             if (!place.geometry) {
-                console.log("Returned place contains no geometry");
                 return;
             }
             var icon = {
@@ -263,8 +262,6 @@ function getFoodAndRating_City1(lat, lng) {
 
     var queryUrlCity1 = "https://api.foursquare.com/v2/venues/explore?&ll=" + lat + "," + lng + "&client_id=J50IQCIUKW05KX5XP24VYIU3CVBAFSBGEXG1EGIL50PEGXA5&client_secret=3G1VQAJ4JDVCZLQALXCR0RHRYY3XYI5IYR4O1G2CFWI4JAR0&query=restaurants&v=20180421";
 
-    console.log("queryUrlCity1", queryUrlCity1);
-
     $.ajax({
         url: queryUrlCity1,
         method: "GET"
@@ -278,14 +275,10 @@ function getFoodAndRating_City2(lat, lng) {
 
     var queryUrlCity2 = "https://api.foursquare.com/v2/venues/explore?&ll=" + lat + "," + lng + "&client_id=J50IQCIUKW05KX5XP24VYIU3CVBAFSBGEXG1EGIL50PEGXA5&client_secret=3G1VQAJ4JDVCZLQALXCR0RHRYY3XYI5IYR4O1G2CFWI4JAR0&query=restaurants&v=20180421";
 
-    console.log("queryUrlCity1", queryUrlCity2);
-
     $.ajax({
         url: queryUrlCity2,
         method: "GET"
     }).then(function (response) {
-
-        console.log("response", response);
 
         getFoodAverage_City2(response.response.groups["0"].items);
     });
@@ -504,8 +497,6 @@ function getTrending_City1(city) {
 
     $("#title_City1").text($("#textCity1").val());
 
-    console.log("TRENDING", queryURL);
-
     $.ajax({
         url: queryURL,
         method: "GET",
@@ -529,17 +520,14 @@ function getTrending_City1(city) {
             $("#trending1_img4_c1").attr("src", response.data.places["3"].thumbnail_url);
             $("#trending1_title4_c1").text(response.data.places["3"].name);
             $("#trending1_descript4_c1").text(response.data.places["3"].perex);
-            console.log("Get trending", response);
 
         });
 }
 
 function getTrending_City2(city) {
-    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=traveling&limit=4";
+    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=traveling&limit=15";
 
     $("#title_City2").text($("#textCity2").val());
-
-    console.log("TRENDING", queryURL);
 
     $.ajax({
         url: queryURL,
@@ -549,6 +537,8 @@ function getTrending_City2(city) {
         }
     })
         .then(function (response) {
+            $("#trending_city2").css("visibility","visible");
+
             $("#trending1_img1_c2").attr("src", response.data.places["0"].thumbnail_url);
             $("#trending1_title1_c2").text(response.data.places["0"].name);
             $("#trending1_descript1_c2").text(response.data.places["0"].perex);
@@ -564,7 +554,6 @@ function getTrending_City2(city) {
             $("#trending1_img4_c2").attr("src", response.data.places["3"].thumbnail_url);
             $("#trending1_title4_c2").text(response.data.places["3"].name);
             $("#trending1_descript4_c2").text(response.data.places["3"].perex);
-            console.log("Get trending", response);
 
         });
 }
