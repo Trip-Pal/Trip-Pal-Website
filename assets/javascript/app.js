@@ -576,18 +576,55 @@ var config = {
     projectId: "project-1-e45b8",
     storageBucket: "project-1-e45b8.appspot.com",
     messagingSenderId: "409341424469"
-};
-firebase.initializeApp(config);
-
-firebase.auth().onAuthStateChanged(function (user) {
-    if (user) {
-        document.getElementById
-    } else {
-        // No user is signed in.
+  };
+  
+  firebase.initializeApp(config);
+  
+  var database = firebase.database();
+  
+  // Initial Values
+  var name = "";
+  var email = "";
+  var password = "";
+  // Capture Button Click
+  $("#submit").on("click", function (event) {
+    console.log("submitted")
+    event.preventDefault();
+  
+    // Grabbed values from text-boxes
+    name = $("#username").val().trim();
+    email = $("#email_field").val().trim();
+    passowrd = $("#password_field").val().trim();
+  
+    // Code for "Setting values in the database"
+    database.ref().set({
+      name: name,
+      email: email,
+      password: password
+      
+    });
+     
+  });
+  
+  // Firebase watcher + initial loader HINT: .on("value")
+  database.ref().on("value", function (snapshot) {
+  
+    // Log everything that's coming out of snapshot
+    console.log("snap",snapshot.val());
+    if (snapshot.val() === null) {
+      console.log("havent set any data yet");
+      return;
     }
-});
-
-function login() {
-    var userEmail = document.getElementById("email_field").value;
-    var userPass = document.getElementById("password_field").value;
-}
+  
+    console.log(snapshot.val().name);
+    console.log(snapshot.val().email);
+    console.log(snapshot.val().passowrd);
+  
+  
+    // Handle the errors
+  }, function (errorObject) {
+    console.log("Errors handled: " + errorObject.code);
+  });
+  
+  
+  
