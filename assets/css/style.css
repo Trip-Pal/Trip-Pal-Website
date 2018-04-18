@@ -3,7 +3,7 @@ body {
   background-image: url('../images/topography.png');
 }
 .navbar-brand{
-  color:#ECE9E6; 
+  color:white; 
   font-size: 30px;
   font-family: 'Lobster';
   filter: brightness(200%);
@@ -14,7 +14,7 @@ body {
    left:80px;
    font-size: 20px;
    font-family: 'Fjalla One', sans-serif;
-   color:#ECE9E6; 
+   color:white; 
    filter: brightness(200%);
  
 }
@@ -92,14 +92,14 @@ filter: brightness(70%);
 }
 h1{
 font-family: 'Fjalla One', sans-serif;
-color: #ECE9E6;
+color: white;
 }
 p{
 font-family: 'Kalam', cursive;
 }
 .pabout{
 font-family: 'Fjalla One', sans-serif;
-color: #ECE9E6;
+color: white;
 }
 a {
 color: turquoise;
@@ -190,4 +190,8 @@ color: turquoise;
   top: 18px;
   font-size: 7px;
   position: absolute;
+}
+
+.compareButton{
+  width:100%;
 }
