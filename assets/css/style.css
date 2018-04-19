@@ -117,7 +117,7 @@ form {
   border-color: #e1e1e1;
       border-radius: 0;
       background-color: #f3f3f3;
-      width:400px;
+     width:400px;
       margin-left: auto;
       margin-right: auto;
   
@@ -202,4 +202,14 @@ form {
 }
 .compareButton{
   width:100%;
+}
+
+.progress{
+  height: 3rem;
+}
+
+.invalid{
+  visibility: hidden;
+  color: red;
+  font-size: 17px;
 }

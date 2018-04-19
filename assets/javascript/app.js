@@ -5,13 +5,15 @@ function initAutocomplete() {
     var mapCity1 = new google.maps.Map(document.getElementById('mapCity1'), {
         center: { lat: 37.871866, lng: -122.264532 },
         zoom: 13,
-        mapTypeId: 'roadmap'
+        mapTypeId: 'roadmap',
+        types: ['cities']
     });
 
     var mapCity2 = new google.maps.Map(document.getElementById('mapCity2'), {
         center: { lat: 37.871866, lng: -122.264532 },
         zoom: 13,
-        mapTypeId: 'roadmap'
+        mapTypeId: 'roadmap',
+        types: ["locality"]
     });
 
     // Create the search box and link it to the UI element.
@@ -102,6 +104,7 @@ function initAutocomplete() {
         // For each place, get the icon, name and location.
         var bounds = new google.maps.LatLngBounds();
         places.forEach(function (place) {
+
             if (!place.geometry) {
                 return;
             }
@@ -138,49 +141,35 @@ function initAutocomplete() {
 
 $(document).on("click", "#compareCities", function (event) {
 
+    $("#validateCity").css("visibility", "hidden");
+
     var city1 = $("#textCity1").val().trim().toLowerCase();
 
-    //city1 = city1.replace(",","+");
-    //city1 = city1.replace(", ","+");
-    city1 = city1.replace(" ", "+");
-    city1 = city1.replace(", ", ",");
-    city1 = city1.replace(".", "");
-    city1 = city1.replace("á", "a");
-    city1 = city1.replace("é", "e");
-    city1 = city1.replace("í", "i");
-    city1 = city1.replace("ó", "o");
-    city1 = city1.replace("ú", "u");
+    var splitCity1 = city1.split(",");
 
-    console.log(city1);
+    city1 = splitCity1[0];
 
     var city2 = $("#textCity2").val().trim().toLowerCase();
 
-    //city2 = city2.replace(" ","+");
-    //city2 = city2.replace(", ","+");
-    city2 = city2.replace(" ", "+");
-    city2 = city2.replace(".", "");
-    city1 = city1.replace(", ", ",");
-    city2 = city2.replace("á", "a");
-    city2 = city2.replace("é", "e");
-    city2 = city2.replace("í", "i");
-    city2 = city2.replace("ó", "o");
-    city2 = city2.replace("ú", "u");
+    var splitCity2 = city2.split(",");
 
-    console.log(city2);
+    city2 = splitCity2[0];
 
-    // if (city1 === "" || city2 === "") {
+    if (city1 === "" || city2 === "") {
+        $("#validateCity").css("visibility", "visible");
+        $("#validateCity").text("Please provide a valid City.");
+    }
+    else {
+        if (city1 === city2) {
+            $("#validateCity").css("visibility", "visible");
+            $("#validateCity").text("You enter the same city, please provide a valid City.");
+        }
+        else {
+            getInfoCity1(city1);
 
-    //}
-    //else{
-    //   if(city1 === city2){
-
-    //   }
-    //   else{
-    getInfoCity1(city1);
-
-    getInfoCity2(city2);
-    //  }
-    //}
+            getInfoCity2(city2);
+        }
+    }
 });
 
 function getInfoCity1(city) {
@@ -261,6 +250,7 @@ function setInformation_City2(informationCity2) {
 function getFoodAndRating_City1(lat, lng) {
 
     var queryUrlCity1 = "https://api.foursquare.com/v2/venues/explore?&ll=" + lat + "," + lng + "&client_id=J50IQCIUKW05KX5XP24VYIU3CVBAFSBGEXG1EGIL50PEGXA5&client_secret=3G1VQAJ4JDVCZLQALXCR0RHRYY3XYI5IYR4O1G2CFWI4JAR0&query=restaurants&v=20180421";
+   
 
     $.ajax({
         url: queryUrlCity1,
@@ -340,6 +330,7 @@ function ratingPlace_City1(calculateRating) {
     var calculate = (calculateRating * 100) / 10;
 
     $("#rating_city1").attr("style", "width: " + calculate + "%");
+    $("#rating_city1").text(calculate.toFixed(2) + "%");
 
     if (calculateRating > 8) {
         $("#rating_city1").addClass("progress-bar progress-bar-striped bg-success progress-bar-animated");
@@ -365,6 +356,7 @@ function ratingPlace_City2(calculateRating) {
     var calculate = (calculateRating * 100) / 10;
 
     $("#rating_city2").attr("style", "width: " + calculate + "%");
+    $("#rating_city2").text(calculate.toFixed(2) + "%");
 
     if (calculateRating > 8) {
         $("#rating_city2").addClass("progress-bar progress-bar-striped bg-success progress-bar-animated");
@@ -387,6 +379,7 @@ function ratingFood_City1(calculateAverageFood) {
     var calculate = (calculateAverageFood * 100) / 4;
 
     $("#ratingFood_city1").attr("style", "width: " + calculate + "%");
+    $("#ratingFood_city1").text(calculate.toFixed(2) + "%");
 
     if (calculateAverageFood <= 2) {
         $("#ratingFood_city1").addClass("progress-bar progress-bar-striped bg-success progress-bar-animated");
@@ -402,6 +395,7 @@ function ratingFood_City2(calculateAverageFood) {
     var calculate = (calculateAverageFood * 100) / 4;
 
     $("#ratingFood_city2").attr("style", "width: " + calculate + "%");
+    $("#ratingFood_city2").text(calculate.toFixed(2) + "%");
 
     if (calculateAverageFood <= 2) {
         $("#ratingFood_city2").addClass("progress-bar progress-bar-striped bg-success progress-bar-animated");
@@ -434,6 +428,7 @@ function getWeather_City1(city) {
             $("#weather_City1").removeClass();
 
             $("#weather_City1").attr("style", "width: " + temperature + "%");
+            $("#weather_City1").text(temperature.toFixed(2) + "°F");
 
             if (temperature > 78) {
                 $("#weather_City1").addClass("progress-bar progress-bar-striped bg-success progress-bar-animated");
@@ -472,6 +467,7 @@ function getWeather_City2(city) {
             var temperature = response.main.temp;
 
             $("#weather_City2").attr("style", "width: " + temperature + "%");
+            $("#weather_City2").text(temperature.toFixed(2) + "°F");
 
             if (temperature > 78) {
                 $("#weather_City2").addClass("progress-bar progress-bar-striped bg-success progress-bar-animated");
@@ -493,6 +489,8 @@ function getWeather_City2(city) {
 }
 
 function getTrending_City1(city) {
+    city = $("#textCity1").val().trim().toLowerCase();
+
     var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=traveling&limit=4";
 
     $("#title_City1").text($("#textCity1").val());
@@ -504,28 +502,52 @@ function getTrending_City1(city) {
             'x-api-key': 'xRQzqTyL1qTDkZej8hQi8YhWsMLMFwB8cwZZY27a'
         }
     })
-        .then(function (response) {
-            $("#trending1_img1_c1").attr("src", response.data.places["0"].thumbnail_url);
+        .then(function (response) {           
+
+            
             $("#trending1_title1_c1").text(response.data.places["0"].name);
             $("#trending1_descript1_c1").text(response.data.places["0"].perex);
-
-            $("#trending1_img2_c1").attr("src", response.data.places["1"].thumbnail_url);
+            if (response.data.places["0"].thumbnail_url !== null){
+                $("#trending1_img1_c1").attr("src", response.data.places["0"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img1_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            } 
+           
             $("#trending1_title2_c1").text(response.data.places["1"].name);
             $("#trending1_descript2_c1").text(response.data.places["1"].perex);
-
-            $("#trending1_img3_c1").attr("src", response.data.places["2"].thumbnail_url);
+            if (response.data.places["1"].thumbnail_url !== null){
+                $("#trending1_img2_c1").attr("src", response.data.places["1"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img2_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            } 
+            
             $("#trending1_title3_c1").text(response.data.places["2"].name);
             $("#trending1_descript3_c1").text(response.data.places["2"].perex);
-
-            $("#trending1_img4_c1").attr("src", response.data.places["3"].thumbnail_url);
+            if (response.data.places["2"].thumbnail_url !== null){
+                $("#trending1_img3_c1").attr("src", response.data.places["2"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img3_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            }
+            
             $("#trending1_title4_c1").text(response.data.places["3"].name);
             $("#trending1_descript4_c1").text(response.data.places["3"].perex);
+            if (response.data.places["3"].thumbnail_url !== null){
+                $("#trending1_img4_c1").attr("src", response.data.places["3"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img4_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            }
 
         });
 }
 
 function getTrending_City2(city) {
-    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=traveling&limit=15";
+    city = $("#textCity2").val().trim().toLowerCase();
+
+    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=traveling&limit=4";
 
     $("#title_City2").text($("#textCity2").val());
 
@@ -537,23 +559,44 @@ function getTrending_City2(city) {
         }
     })
         .then(function (response) {
-            $("#trending_city2").css("visibility","visible");
+            
+            $("#trending_city2").css("visibility", "visible");
 
-            $("#trending1_img1_c2").attr("src", response.data.places["0"].thumbnail_url);
             $("#trending1_title1_c2").text(response.data.places["0"].name);
             $("#trending1_descript1_c2").text(response.data.places["0"].perex);
+            if (response.data.places["0"].thumbnail_url !== null){
+                $("#trending1_img1_c2").attr("src", response.data.places["0"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img1_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            }            
 
-            $("#trending1_img2_c2").attr("src", response.data.places["1"].thumbnail_url);
             $("#trending1_title2_c2").text(response.data.places["1"].name);
             $("#trending1_descript2_c2").text(response.data.places["1"].perex);
+            if (response.data.places["1"].thumbnail_url !== null){
+                $("#trending1_img2_c2").attr("src", response.data.places["1"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img2_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            }  
 
-            $("#trending1_img3_c2").attr("src", response.data.places["2"].thumbnail_url);
             $("#trending1_title3_c2").text(response.data.places["2"].name);
             $("#trending1_descript3_c2").text(response.data.places["2"].perex);
-
-            $("#trending1_img4_c2").attr("src", response.data.places["3"].thumbnail_url);
+            if (response.data.places["2"].thumbnail_url !== null){
+                $("#trending1_img3_c2").attr("src", response.data.places["2"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img3_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            }
+            
             $("#trending1_title4_c2").text(response.data.places["3"].name);
             $("#trending1_descript4_c2").text(response.data.places["3"].perex);
+            if (response.data.places["3"].thumbnail_url !== null){
+                $("#trending1_img4_c2").attr("src", response.data.places["3"].thumbnail_url);
+            }
+            else{
+                $("#trending1_img4_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+            }
 
         });
 }
@@ -565,55 +608,54 @@ var config = {
     projectId: "project-1-e45b8",
     storageBucket: "project-1-e45b8.appspot.com",
     messagingSenderId: "409341424469"
-  };
-  
-  firebase.initializeApp(config);
-  
-  var database = firebase.database();
-  
-  // Initial Values
-  var name = "";
-  var email = "";
-  var password = "";
-  // Capture Button Click
-  $("#submit").on("click", function (event) {
+};
+
+firebase.initializeApp(config);
+
+var database = firebase.database();
+
+// Initial Values
+var name = "";
+var email = "";
+var password = "";
+// Capture Button Click
+$("#submit").on("click", function (event) {
     console.log("submitted")
     event.preventDefault();
-  
+
     // Grabbed values from text-boxes
     name = $("#username").val().trim();
     email = $("#email_field").val().trim();
     passowrd = $("#password_field").val().trim();
-  
+
     // Code for "Setting values in the database"
     database.ref().set({
-      name: name,
-      email: email,
-      password: password
-      
+        name: name,
+        email: email,
+        password: password
+
     });
-     
-  });
-  
-  // Firebase watcher + initial loader HINT: .on("value")
-  database.ref().on("value", function (snapshot) {
-  
+
+});
+
+// Firebase watcher + initial loader HINT: .on("value")
+database.ref().on("value", function (snapshot) {
+
     // Log everything that's coming out of snapshot
-    console.log("snap",snapshot.val());
+    console.log("snap", snapshot.val());
     if (snapshot.val() === null) {
-      console.log("havent set any data yet");
-      return;
+        console.log("havent set any data yet");
+        return;
     }
-  
+
     console.log(snapshot.val().name);
     console.log(snapshot.val().email);
     console.log(snapshot.val().passowrd);
-  
-  
+
+
     // Handle the errors
-  }, function (errorObject) {
+}, function (errorObject) {
     console.log("Errors handled: " + errorObject.code);
-  });
-  
-  
-  
+});
+
+
