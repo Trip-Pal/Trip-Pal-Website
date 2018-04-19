@@ -518,7 +518,7 @@ function getTrending_City1(city) {
                     $("#trending1_img1_c1").attr("src", response.data.places["0"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img1_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img1_c1").attr("src", "./assets/images/logo.png");
                 }
 
                 $("#trending1_title2_c1").text(response.data.places["1"].name);
@@ -527,7 +527,7 @@ function getTrending_City1(city) {
                     $("#trending1_img2_c1").attr("src", response.data.places["1"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img2_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img2_c1").attr("src", "./assets/images/logo.png");
                 }
 
                 $("#trending1_title3_c1").text(response.data.places["2"].name);
@@ -536,7 +536,7 @@ function getTrending_City1(city) {
                     $("#trending1_img3_c1").attr("src", response.data.places["2"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img3_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img3_c1").attr("src", "./assets/images/logo.png");
                 }
 
                 $("#trending1_title4_c1").text(response.data.places["3"].name);
@@ -545,7 +545,7 @@ function getTrending_City1(city) {
                     $("#trending1_img4_c1").attr("src", response.data.places["3"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img4_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img4_c1").attr("src", "./assets/images/logo.png");
                 }
             }
             else{
@@ -579,11 +579,12 @@ function getTrending_City2(city) {
 
                 $("#trending1_title1_c2").text(response.data.places["0"].name);
                 $("#trending1_descript1_c2").text(response.data.places["0"].perex);
+                console.log("image",response.data.places["0"].thumbnail_url);
                 if (response.data.places["0"].thumbnail_url !== null) {
                     $("#trending1_img1_c2").attr("src", response.data.places["0"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img1_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img1_c2").attr("src", "./assets/images/logo.png");
                 }
 
                 $("#trending1_title2_c2").text(response.data.places["1"].name);
@@ -592,7 +593,7 @@ function getTrending_City2(city) {
                     $("#trending1_img2_c2").attr("src", response.data.places["1"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img2_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img2_c2").attr("src", "./assets/images/logo.png");
                 }
 
                 $("#trending1_title3_c2").text(response.data.places["2"].name);
@@ -601,7 +602,7 @@ function getTrending_City2(city) {
                     $("#trending1_img3_c2").attr("src", response.data.places["2"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img3_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img3_c2").attr("src", "./assets/images/logo.png");
                 }
 
                 $("#trending1_title4_c2").text(response.data.places["3"].name);
@@ -610,7 +611,7 @@ function getTrending_City2(city) {
                     $("#trending1_img4_c2").attr("src", response.data.places["3"].thumbnail_url);
                 }
                 else {
-                    $("#trending1_img4_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                    $("#trending1_img4_c2").attr("src", "./assets/images/logo.png");
                 }
 
             }else{
