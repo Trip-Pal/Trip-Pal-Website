@@ -67,6 +67,7 @@ color: turquoise;
 .card-title{
 font-family: 'Asap', sans-serif;
 color: turquoise;
+font-size: 30px;
 }
 button.btn.btn-secondary:first-child{
 color: white;
@@ -100,6 +101,7 @@ font-family: 'Kalam', cursive;
 .pabout{
 font-family: 'Fjalla One', sans-serif;
 color: white;
+font-size: 20px;
 }
 a {
 color: turquoise;
@@ -212,4 +214,21 @@ form {
   visibility: hidden;
   color: red;
   font-size: 17px;
+}
+
+.card-img-top{
+ height:50%;
+}
+
+.logo{
+  height:80%;
+  width:90%;
+  margin:0;
+  padding:0;
+}
+
+.positionH{
+  font-size: 25px;
+  margin:0;
+  padding:0;
 }
