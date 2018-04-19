@@ -65,8 +65,7 @@
                     <div class="carousel-caption d-none d-md-block text-left">
                         <h1 class="headlineFont">Simple and friendly</h1>
                         <p class="headlineP">Tired of browsing through the internet looking for the perfect place to travel for you?
-                            <br>With Trip-Pal's simple and friendly layout, comparing travel destinations based on your own preferences
-                            has never been easier.
+                            <br>With Trip-Pal's simple and friendly layout, comparing destinations based on your preferences has never been easier.
                         </p>
                     </div>
                 </div>
@@ -145,7 +144,7 @@
                                         aria-valuemin="0" aria-valuemax="100">0%</div>
                                 </div>
                             </td>
-                            <th scope="row">People prefers</th>
+                            <th scope="row">Attractions</th>
                             <td>
                                 <div class="progress" style="width: 80px" ;>
                                     <div id="rating_city2" class="progress-bar progress-bar-striped" role="progressbar" style="width: 100%" aria-valuenow="10"
@@ -200,7 +199,7 @@
         </div>
     </div>
     <!-- Trending Part -->
-    <div class="container">
+    <div class="container" id="trending_city1">
 
         <!-- Page Heading -->
         <h1 class="my-4">Trending Places</h1>
@@ -214,7 +213,7 @@
                             <h2 id="trending1_title1_c1">New Orleans, Louisiana</h2>
                         </h4>
                         <p id="trending1_descript1_c1" class="card-text">The Mississippi River is now dotted with riverside pocket parks, replacing the warehouses and railroad
-                            tracks that once blocked the view. -- Sean Cooley</p>
+                            tracks that once blocked the view. <br>-- Sean Cooley</p>
                     </div>
                 </div>
             </div>
@@ -226,7 +225,7 @@
                             <h2 id="trending1_title2_c1">Cartagena, Colombia</h2>
                         </h4>
                         <p id="trending1_descript2_c1" class="card-text">Catch the authentic South American experience before everyone else arrives. The cities are spectacular,
-                            cosmopolitan. -- Matt Meltzer</p>
+                            cosmopolitan. <br>-- Matt Meltzer</p>
                     </div>
                 </div>
             </div>
@@ -240,7 +239,7 @@
                         <p id="trending1_descript3_c1" class="card-text">You’ve probably seen Malta before, whether you knew it at the time or not. It’s a Game of Thrones
                             stalwart, with sites that have doubled as the Red Keep and seen more than their fair share of
                             mock sword-fights. But when the novelty of pretending you only speak Dothraki has worn off, you’ll
-                            find there’s much more to it. -- Jonathan Melmoth</p>
+                            find there’s much more to it. <br>-- Jonathan Melmoth</p>
                     </div>
                 </div>
             </div>
@@ -252,7 +251,7 @@
                             <h2 id="trending1_title4_c1">Cape Town, South Africa</h2>
                         </h4>
                         <p id="trending1_descript4_c1" class="card-text">The world’s most beautiful coastal city is primed for animal lovers. “Cape Town’s on my bucket list,
-                            and I’ll also do a safari in Kruger,” says everyone always, and for good reason. --Ashley Harrell</p>
+                            and I’ll also do a safari in Kruger,” says everyone always, and for good reason. <br>-- Ashley Harrell</p>
                     </div>
                 </div>
             </div>
@@ -315,6 +314,25 @@
         </div>
     </div>
     <!-- /.row -->
+
+    <!-- 
+        Trending - Not information
+    -->
+    <div id="notTrending" class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalCenterTitle">City not found</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body" id="textModal">
+                    
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAgoc-KYuvdF0TT1JxLfBh2K59IqPfAwxA&libraries=places&language=en&callback=initAutocomplete"
         async defer></script>
 

@@ -141,7 +141,7 @@ function initAutocomplete() {
 
 $(document).on("click", "#compareCities", function (event) {
 
-    $("#validateCity").css("visibility", "hidden");
+    $("#validateCity").css("visibility", "hidden");  
 
     var city1 = $("#textCity1").val().trim().toLowerCase();
 
@@ -165,6 +165,9 @@ $(document).on("click", "#compareCities", function (event) {
             $("#validateCity").text("You enter the same city, please provide a valid City.");
         }
         else {
+            $("#trending_city2").css("visibility", "hidden");
+            $("#trending_city1").css("visibility", "hidden");
+
             getInfoCity1(city1);
 
             getInfoCity2(city2);
@@ -250,7 +253,7 @@ function setInformation_City2(informationCity2) {
 function getFoodAndRating_City1(lat, lng) {
 
     var queryUrlCity1 = "https://api.foursquare.com/v2/venues/explore?&ll=" + lat + "," + lng + "&client_id=J50IQCIUKW05KX5XP24VYIU3CVBAFSBGEXG1EGIL50PEGXA5&client_secret=3G1VQAJ4JDVCZLQALXCR0RHRYY3XYI5IYR4O1G2CFWI4JAR0&query=restaurants&v=20180421";
-   
+
 
     $.ajax({
         url: queryUrlCity1,
@@ -278,6 +281,8 @@ function getFoodAverage_City1(restauranteList) {
     var averageFood = 0;
 
     var rating = 0;
+
+    console.log("list", restauranteList);
 
     for (var itemFood = 0; itemFood < restauranteList.length - 1; itemFood++) {
         //Food Average
@@ -491,7 +496,7 @@ function getWeather_City2(city) {
 function getTrending_City1(city) {
     city = $("#textCity1").val().trim().toLowerCase();
 
-    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=traveling&limit=4";
+    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=going_out&limit=4&lang=en";
 
     $("#title_City1").text($("#textCity1").val());
 
@@ -502,43 +507,50 @@ function getTrending_City1(city) {
             'x-api-key': 'xRQzqTyL1qTDkZej8hQi8YhWsMLMFwB8cwZZY27a'
         }
     })
-        .then(function (response) {           
+        .then(function (response) {
 
-            
-            $("#trending1_title1_c1").text(response.data.places["0"].name);
-            $("#trending1_descript1_c1").text(response.data.places["0"].perex);
-            if (response.data.places["0"].thumbnail_url !== null){
-                $("#trending1_img1_c1").attr("src", response.data.places["0"].thumbnail_url);
+            if (response.data.places.length > 0) {
+                $("#trending_city1").css("visibility", "visible");
+
+                $("#trending1_title1_c1").text(response.data.places["0"].name);
+                $("#trending1_descript1_c1").text(response.data.places["0"].perex);
+                if (response.data.places["0"].thumbnail_url !== null) {
+                    $("#trending1_img1_c1").attr("src", response.data.places["0"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img1_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
+
+                $("#trending1_title2_c1").text(response.data.places["1"].name);
+                $("#trending1_descript2_c1").text(response.data.places["1"].perex);
+                if (response.data.places["1"].thumbnail_url !== null) {
+                    $("#trending1_img2_c1").attr("src", response.data.places["1"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img2_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
+
+                $("#trending1_title3_c1").text(response.data.places["2"].name);
+                $("#trending1_descript3_c1").text(response.data.places["2"].perex);
+                if (response.data.places["2"].thumbnail_url !== null) {
+                    $("#trending1_img3_c1").attr("src", response.data.places["2"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img3_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
+
+                $("#trending1_title4_c1").text(response.data.places["3"].name);
+                $("#trending1_descript4_c1").text(response.data.places["3"].perex);
+                if (response.data.places["3"].thumbnail_url !== null) {
+                    $("#trending1_img4_c1").attr("src", response.data.places["3"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img4_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
             }
             else{
-                $("#trending1_img1_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
-            } 
-           
-            $("#trending1_title2_c1").text(response.data.places["1"].name);
-            $("#trending1_descript2_c1").text(response.data.places["1"].perex);
-            if (response.data.places["1"].thumbnail_url !== null){
-                $("#trending1_img2_c1").attr("src", response.data.places["1"].thumbnail_url);
-            }
-            else{
-                $("#trending1_img2_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
-            } 
-            
-            $("#trending1_title3_c1").text(response.data.places["2"].name);
-            $("#trending1_descript3_c1").text(response.data.places["2"].perex);
-            if (response.data.places["2"].thumbnail_url !== null){
-                $("#trending1_img3_c1").attr("src", response.data.places["2"].thumbnail_url);
-            }
-            else{
-                $("#trending1_img3_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
-            }
-            
-            $("#trending1_title4_c1").text(response.data.places["3"].name);
-            $("#trending1_descript4_c1").text(response.data.places["3"].perex);
-            if (response.data.places["3"].thumbnail_url !== null){
-                $("#trending1_img4_c1").attr("src", response.data.places["3"].thumbnail_url);
-            }
-            else{
-                $("#trending1_img4_c1").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                $("#textModal").text("Sorry! I could not find trending information about the "+ $("#textCity1").val());
+                $('#notTrending').modal('show');
             }
 
         });
@@ -547,7 +559,7 @@ function getTrending_City1(city) {
 function getTrending_City2(city) {
     city = $("#textCity2").val().trim().toLowerCase();
 
-    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=traveling&limit=4";
+    var queryURL = "https://api.sygictravelapi.com/1.0/en/places/list?query=" + city + "&categories=going_out&limit=4&lang=en";
 
     $("#title_City2").text($("#textCity2").val());
 
@@ -559,45 +571,52 @@ function getTrending_City2(city) {
         }
     })
         .then(function (response) {
-            
-            $("#trending_city2").css("visibility", "visible");
 
-            $("#trending1_title1_c2").text(response.data.places["0"].name);
-            $("#trending1_descript1_c2").text(response.data.places["0"].perex);
-            if (response.data.places["0"].thumbnail_url !== null){
-                $("#trending1_img1_c2").attr("src", response.data.places["0"].thumbnail_url);
-            }
-            else{
-                $("#trending1_img1_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
-            }            
+            console.log("response", response);
 
-            $("#trending1_title2_c2").text(response.data.places["1"].name);
-            $("#trending1_descript2_c2").text(response.data.places["1"].perex);
-            if (response.data.places["1"].thumbnail_url !== null){
-                $("#trending1_img2_c2").attr("src", response.data.places["1"].thumbnail_url);
-            }
-            else{
-                $("#trending1_img2_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
-            }  
+            if (response.data.places.length > 0) {
+                $("#trending_city2").css("visibility", "visible");
 
-            $("#trending1_title3_c2").text(response.data.places["2"].name);
-            $("#trending1_descript3_c2").text(response.data.places["2"].perex);
-            if (response.data.places["2"].thumbnail_url !== null){
-                $("#trending1_img3_c2").attr("src", response.data.places["2"].thumbnail_url);
-            }
-            else{
-                $("#trending1_img3_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
-            }
-            
-            $("#trending1_title4_c2").text(response.data.places["3"].name);
-            $("#trending1_descript4_c2").text(response.data.places["3"].perex);
-            if (response.data.places["3"].thumbnail_url !== null){
-                $("#trending1_img4_c2").attr("src", response.data.places["3"].thumbnail_url);
-            }
-            else{
-                $("#trending1_img4_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
-            }
+                $("#trending1_title1_c2").text(response.data.places["0"].name);
+                $("#trending1_descript1_c2").text(response.data.places["0"].perex);
+                if (response.data.places["0"].thumbnail_url !== null) {
+                    $("#trending1_img1_c2").attr("src", response.data.places["0"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img1_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
 
+                $("#trending1_title2_c2").text(response.data.places["1"].name);
+                $("#trending1_descript2_c2").text(response.data.places["1"].perex);
+                if (response.data.places["1"].thumbnail_url !== null) {
+                    $("#trending1_img2_c2").attr("src", response.data.places["1"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img2_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
+
+                $("#trending1_title3_c2").text(response.data.places["2"].name);
+                $("#trending1_descript3_c2").text(response.data.places["2"].perex);
+                if (response.data.places["2"].thumbnail_url !== null) {
+                    $("#trending1_img3_c2").attr("src", response.data.places["2"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img3_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
+
+                $("#trending1_title4_c2").text(response.data.places["3"].name);
+                $("#trending1_descript4_c2").text(response.data.places["3"].perex);
+                if (response.data.places["3"].thumbnail_url !== null) {
+                    $("#trending1_img4_c2").attr("src", response.data.places["3"].thumbnail_url);
+                }
+                else {
+                    $("#trending1_img4_c2").attr("src", "./assets/images/sorry-image-not-available.jpg");
+                }
+
+            }else{
+                $("#textModal").text("Sorry! I could not find trending information about the "+ $("#textCity2").val());
+                $('#notTrending').modal('show');
+            }
         });
 }
 
